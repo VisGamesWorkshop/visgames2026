@@ -2,12 +2,11 @@
 // @ts-ignore
 import { Icon } from "astro-icon/components";
 import Proposal from "assets/proposal.pdf";
-
 ---
 
-<div class="mt-16 md:mt-0">
+<div class="mt-16 md:mt-0 fade-in-section" data-fade>
   <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
-    Collaborate, Create, Play
+    Collaborate, Create, <span class="italic text-[#FF69B4]">Play</span>
   </h2>
   <p class="text-lg mt-4 text-slate-600">
     Our mission is to advance data visualization games and playful activities as dynamic tools for communication, co-creation, and collaborative problem-solving in interdisciplinary environments and contexts. 
@@ -32,52 +31,87 @@ import Proposal from "assets/proposal.pdf";
   </p>
 </div>
 
-<div class="grid sm:grid-cols-2 md:grid-cols-2 mt-16 mb-16 gap-16">
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
-          <Icon class="text-white w-full h-full" name="bx:bxs-dice-5" />
+<div class="grid sm:grid-cols-2 md:grid-cols-2 mt-16 mb-16 gap-16 fade-in-section" data-fade>
+      <div class="flex gap-4 items-start group cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#FF69B4] hover:text-white p-4 rounded-lg hover:shadow-lg">
+        <div class="mt-1 bg-[#FF69B4] rounded-full p-2 w-12 h-12 shrink-0 group-hover:bg-white transition-all duration-300">
+          <Icon class="text-white w-full h-full group-hover:text-[#FF69B4] transition-all duration-300" name="bx:bxs-dice-5" />
         </div>
         <div>
-          <h3 class="font-semibold text-lg">Visualization Games</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">Demonstrate visualization games (e.g., card games, digital games, etc.) and engage with the audience by playing the games at the conference, in a World Café setting.</p>
+          <h3 class="font-semibold text-lg group-hover:text-white transition-all duration-300">Visualization Games</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed group-hover:text-white transition-all duration-300">Demonstrate visualization games (e.g., card games, digital games, etc.) and engage with the audience by playing the games at the conference, in a World Café setting.</p>
         </div>
       </div>
 
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
-          <Icon class="text-white w-full h-full" name="bx:bxs-file-blank" />
+      <div class="flex gap-4 items-start group cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#FF69B4] hover:text-white p-4 rounded-lg hover:shadow-lg">
+        <div class="mt-1 bg-[#FF69B4] rounded-full p-2 w-12 h-12 shrink-0 group-hover:bg-white transition-all duration-300">
+          <Icon class="text-white w-full h-full group-hover:text-[#FF69B4] transition-all duration-300" name="bx:bxs-file-blank" />
         </div>
         <div>
-          <h3 class="font-semibold text-lg">Extended Abstract</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">
-            Submit an extended abstract in the VisGames template format. 
-            
-            We will publish the extended abstracts in the online blog 
-            <a  href="https://nightingaledvs.com/"
-            target="_blank"
-            class="underline"
-            rel="noopener">Nightingale</a>, run by the Data Visualization Society, as well as in the EuroGraphics Digital Library.
+          <h3 class="font-semibold text-lg group-hover:text-white transition-all duration-300">Extended Abstract</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed group-hover:text-white transition-all duration-300">
+        Submit an extended abstract in the VisGames template format. 
+        
+        We will publish the extended abstracts in the online blog 
+        <a  href="https://nightingaledvs.com/"
+        target="_blank"
+        class="underline"
+        rel="noopener">Nightingale</a>, run by the Data Visualization Society, as well as in the EuroGraphics Digital Library.
           </p>
         </div>
       </div>
 
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
-          <Icon class="text-white w-full h-full" name="bx:git-branch" />
+      <div class="flex gap-4 items-start group cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#FF69B4] hover:text-white p-4 rounded-lg hover:shadow-lg">
+        <div class="mt-1 bg-[#FF69B4] rounded-full p-2 w-12 h-12 shrink-0 group-hover:bg-white transition-all duration-300">
+          <Icon class="text-white w-full h-full group-hover:text-[#FF69B4] transition-all duration-300" name="bx:git-branch" />
         </div>
         <div>
-          <h3 class="font-semibold text-lg">Curated Repository</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">A collection of visualization games for diverse audiences (e.g., children/adult learning, data journalists/data scientists/computer scientists/designers) in different scenarios (e.g., onsite, online, hybrid).</p>
+          <h3 class="font-semibold text-lg group-hover:text-white transition-all duration-300">Curated Repository</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed group-hover:text-white transition-all duration-300">A collection of visualization games for diverse audiences (e.g., children/adult learning, data journalists/data scientists/computer scientists/designers) in different scenarios (e.g., onsite, online, hybrid).</p>
         </div>
       </div>
 
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
-          <Icon class="text-white w-full h-full" name="bx:bxs-chat" />
+      <div class="flex gap-4 items-start group cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#FF69B4] hover:text-white p-4 rounded-lg hover:shadow-lg">
+        <div class="mt-1 bg-[#FF69B4] rounded-full p-2 w-12 h-12 shrink-0 group-hover:bg-white transition-all duration-300">
+          <Icon class="text-white w-full h-full group-hover:text-[#FF69B4] transition-all duration-300" name="bx:bxs-chat" />
         </div>
         <div>
-          <h3 class="font-semibold text-lg">Discussion Platform</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">Create a platform to disucss new game or activity ideas, exchange experiences, best practices, and challenges while developing visualization games.</p>
+          <h3 class="font-semibold text-lg group-hover:text-white transition-all duration-300">Discussion Platform</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed group-hover:text-white transition-all duration-300">Create a platform to disucss new game or activity ideas, exchange experiences, best practices, and challenges while developing visualization games.</p>
         </div>
       </div>
 </div>
+
+<style>
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const faderElements = document.querySelectorAll('[data-fade]');
+  
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+
+  faderElements.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
