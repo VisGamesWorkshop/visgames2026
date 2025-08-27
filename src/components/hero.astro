@@ -1,0 +1,61 @@
+---
+import { Picture } from "astro:assets";
+import heroImage from "assets/hero.svg";
+import Link from "@components/ui/link.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<main
+  class="grid lg:grid-cols-2 place-items-center pb-8 md:pt-12 md:pb-24">
+  <div class="py-6 md:order-1 md:block">
+    <Picture
+      src={heroImage}
+      alt="VisGames"
+      widths={[200, 400, 600]}
+      sizes="(max-width: 600px) 100vw, 620px"
+      loading="eager"
+      format="avif"
+    />
+  </div>
+  <div>
+    <h1
+      class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
+      Workshop on Visualization Play, Games, and Activities
+    </h1>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      This is the first EuroVis Workshop on Visualization Play, Games, and Activities that 
+      is collocated with the <a
+      href="https://www.eurovis.org/"
+      target="_blank"
+      class="underline"
+      rel="noopener">
+      EuroVis conference</a> taking place from June 2-6, 2025 in Luxembourg.    
+    </p>
+
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      2<sup>nd</sup> of June 2025, Luxembourg
+    </p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="https://github.com/VisGamesWorkshop/visgames2025_submissions"
+        class="flex gap-1 items-center justify-center"
+        target="_blank">
+        <Icon class="text-black w-6 h-6" name="bx:bxl-github" />
+            Submissions & Materials
+      </Link>
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="https://diglib.eg.org/handle/10.2312/3607186"
+        class="flex gap-1 items-center justify-center"
+        target="_blank">
+        <Icon class="text-black w-6 h-6" name="mdi:file-document-outline" />
+          Papers & Proceedings
+      </Link>
+    </div>
+  </div>
+</main>

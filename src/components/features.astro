@@ -1,0 +1,83 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+import Proposal from "assets/proposal.pdf";
+
+---
+
+<div class="mt-16 md:mt-0">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+    Collaborate, Create, Play
+  </h2>
+  <p class="text-lg mt-4 text-slate-600">
+    Our mission is to advance data visualization games and playful activities as dynamic tools for communication, co-creation, and collaborative problem-solving in interdisciplinary environments and contexts. 
+  </p>
+  <p class="text-lg mt-4 text-slate-600">
+    We consider a data visualization game as an interactive activity or game-based tool that incorporates elements of data visualization to engage people in a playful way. 
+  </p>
+  <p class="text-lg mt-4 text-slate-600">
+    This workshop will showcase innovative uses of data visualization games beyond education, emphasizing their potential to enrich dialogue, build shared understanding, and inspire creative solutions in real-world contexts. 
+  </p>
+  <p class="text-lg mt-4 text-slate-600">
+  The half-day workshop will feature an opening and fast-forward session, two hands-on World Café-style sessions for exploring submitted visualization games, and a reflection session for discussing experiences and concluding the workshop.
+  </p>
+  <wbr />
+  <p class="text-lg mt-4 text-slate-600">
+    The full workshop proposal is available <a 
+    href={Proposal}
+    target="_blank"
+    class="underline"
+    rel="noopener"
+    download>here.</a>     
+  </p>
+</div>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-2 mt-16 mb-16 gap-16">
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
+          <Icon class="text-white w-full h-full" name="bx:bxs-dice-5" />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Visualization Games</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">Demonstrate visualization games (e.g., card games, digital games, etc.) and engage with the audience by playing the games at the conference, in a World Café setting.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
+          <Icon class="text-white w-full h-full" name="bx:bxs-file-blank" />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Extended Abstract</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">
+            Submit an extended abstract in the VisGames template format. 
+            
+            We will publish the extended abstracts in the online blog 
+            <a  href="https://nightingaledvs.com/"
+            target="_blank"
+            class="underline"
+            rel="noopener">Nightingale</a>, run by the Data Visualization Society, as well as in the EuroGraphics Digital Library.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
+          <Icon class="text-white w-full h-full" name="bx:git-branch" />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Curated Repository</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">A collection of visualization games for diverse audiences (e.g., children/adult learning, data journalists/data scientists/computer scientists/designers) in different scenarios (e.g., onsite, online, hybrid).</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-[#f16248] rounded-full p-2 w-12 h-12 shrink-0">
+          <Icon class="text-white w-full h-full" name="bx:bxs-chat" />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Discussion Platform</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">Create a platform to disucss new game or activity ideas, exchange experiences, best practices, and challenges while developing visualization games.</p>
+        </div>
+      </div>
+</div>

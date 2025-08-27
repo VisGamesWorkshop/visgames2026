@@ -1,0 +1,40 @@
+---
+// @ts-ignore
+const topics = [
+    "Storytelling Games",
+    "Idea Generation Games",
+    "Decision-making Activities",
+    "Stakeholder Engagement Games",
+    "Visualization Design Activites",
+    "Design Evaluation Games",
+    "Visualization Activities",
+    "Serious Games",
+    "Digital Games",
+    "Analog Games",
+    "Educational Games",
+    "Gamification Approaches"
+];
+
+
+---
+
+
+<div class="mt-16 md:mt-0 mb-8">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+    Workshop Topics
+  </h2>
+  <p class="text-lg mt-4 text-slate-600">
+    The following topics fall within the scope of the workshop, but we encourage
+    broader contributions.
+  </p>
+</div>
+
+<div class="mt-12 mb-12 md:mt-0">
+    {topics.sort(() => Math.random() - 0.5).map((topic) => (
+        <div class="inline-block mb-6 mt-4 mr-2 last:mr-0">
+            <span class="bg-[#F16248] border border-[#F16248] text-white text-lg font-bold me-2 px-5 py-2 rounded">
+                {topic}
+            </span>
+        </div>
+    ))}
+</div>

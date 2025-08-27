@@ -1,0 +1,51 @@
+---
+import Link from "./ui/link.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div
+  class="mb-12 bg-black p-8 md:px-20 md:py-20 mt-20 mx-auto max-w-5xl rounded-lg flex flex-col items-center">
+  <h2 class="text-white text-3xl md:text-4xl tracking-tight">
+    Submission Guidelines and Reviewing Process
+  </h2>
+  <p class="text-slate-400 mt-4 text-lg md:text-xl">
+    The workshop's extended abstract will be peer-reviewed by at least two PC members and one workshop organizer.
+  </p>
+  <p class="text-slate-400 mt-4 text-lg md:text-xl">
+    The maximum length for the extended abstract to the VisGames workshop is 2-6 pages including all images, acknowledgements, and references.
+    We accept both double-blind (anonymized) and single-blind (not anonymized) submissions. 
+  </p>
+  <p class="text-slate-400 mt-4 text-lg md:text-xl">
+    Submissions must be made using the Computer Graphics Forum style, using the conference LaTeX template for workshops. 
+    In the template you will find a proposed structure for the extended abstract.
+  </p>
+<div class="flex mt-5">
+  <Link
+    size="lg"
+    style="outline"
+    rel="noopener"
+    href="/template.zip"
+    class="flex gap-1 items-center justify-center"
+    target="_blank"
+    href="javascript:void(0)"
+    class="flex gap-1 ml-2 items-center justify-center cursor-not-allowed opacity-50"
+    disabled>
+    <Icon class="text-black w-8 h-8" name="bx:download" />
+    VisGames Template
+  </Link>
+  <Link
+    size="lg"
+    style="outline"
+    rel="noopener"
+    target="_blank"
+    href="javascript:void(0)"
+    class="flex gap-1 ml-2 items-center justify-center cursor-not-allowed opacity-50"
+    disabled>
+    <Icon class="text-black w-8 h-8" name="bx:upload" />
+    Submit to PCS
+  </Link>
+</div>
+  <p class="text-white bold mt-4 text-lg md:text-xl">
+    Select Society: Eurographics, Conference: EuroVis 2025, Track: EuroVis 2025 VisGames
+  </p>
+</div>

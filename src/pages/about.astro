@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+---
+<div class="mt-16 md:mt-0">
+    <h1 class="text-5xl lg:text-6xl xl:text-7xl text-center font-bold lg:tracking-tight xl:tracking-tighter">
+    Workshop Organizers
+    </h1>
+
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+      {
+        
+        publishedTeamMembers.map((teamMemberEntry) => (
+          <div class="group">
+            {/* <div class="w-full aspect-square">
+              <Picture
+                src={teamMemberEntry.data.avatar.src}
+                alt={teamMemberEntry.data.avatar.alt}
+                sizes="(max-width: 800px) 100vw, 400px"
+                width={400}
+                height={400}
+                class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+              />
+            </div> */}
+
+            <div class="mt-4 text-center">
+                <a href={teamMemberEntry.data.homepage} class="text-blue-500 hover:underline"
+                title={teamMemberEntry.data.name}>
+                <h2 class="text-lg text-gray-800 flex items-center justify-center space-x-2 underline">
+                  <Icon class="text-black w-6 h-6" name="bx:user-circle" />
+                <span>{teamMemberEntry.data.name}</span>
+                </h2>
+                </a>
+              <h3 class="text-md text-slate-500 mb-2">
+                {teamMemberEntry.data.affiliation}
+              </h3>
+
+              <p style="text-align: justify; text-justify: inter-word; word-break: break-word;">
+                {teamMemberEntry.data.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
