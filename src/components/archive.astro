@@ -1,0 +1,78 @@
+---
+export interface Props {
+  year: string;
+  title?: string;
+  description?: string;
+  papers: Array<{
+    title: string;
+    authors: string;
+    pdfUrl?: string;
+    nightingaleUrl?: string;
+  }>;
+}
+
+const { year, title, description, papers } = Astro.props;
+
+const defaultTitle = `Archive`;
+const defaultDescription = `Explore the evolution of visualization and games through our collection of accepted papers and research contributions from past workshop iterations.`;
+---
+
+<div class="archive-section">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight text-[#FF69B4] mb-4">
+    {title || defaultTitle}
+  </h2>
+  
+  <h3 class="text-2xl lg:text-3xl font-semibold text-[#FF69B4] mb-6">
+    {year} - Accepted VisGames
+  </h3>
+  
+  <p class="text-lg mt-4 text-slate-600">
+    {description || defaultDescription}
+  </p>
+  <p class="text-lg mt-4 text-slate-600">
+    Below are the papers accepted to the {year} workshop, showcasing innovative research at the intersection of visualization and games.
+  </p>
+
+  <ul class="mt-8 list-disc list-inside text-slate-600 text-lg space-y-4">
+    {papers.map((paper) => (
+      <li class="border-l-4 border-[#FF69B4] pl-4 py-2">
+        {paper.pdfUrl && (
+          <a href={paper.pdfUrl} target="_blank" class="text-[#FF69B4] hover:text-[#E055A1]">
+            <span>🔗</span> <strong><em>{paper.title}</em></strong>
+          </a>
+        )}
+        {!paper.pdfUrl && (
+          <span class="text-[#FF69B4]"><strong><em>{paper.title}</em></strong></span>
+        )}
+        <br />
+        <span class="text-slate-500">- {paper.authors}</span>
+        {paper.nightingaleUrl && (
+          <>
+            <br />
+            <a href={paper.nightingaleUrl} target="_blank" class="text-[#FF69B4] hover:underline font-bold hover:text-[#E055A1]">
+              👉 Read it on Nightingale Magazine!
+            </a>
+          </>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .archive-section {
+    margin-bottom: 3rem;
+  }
+  
+  .archive-section li {
+    margin-bottom: 1.5rem;
+  }
+  
+  .archive-section a {
+    text-decoration: none;
+  }
+  
+  .archive-section a:hover {
+    text-decoration: underline;
+  }
+</style>

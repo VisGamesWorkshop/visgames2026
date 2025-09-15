@@ -10,48 +10,181 @@ import Sectionhead from "@components/sectionhead.astro";
 const publishedTeamMembers = await getCollection("team", ({ data }) => {
   return !data.draft && data.publishDate < new Date();
 });
+
+// Sort team members by role hierarchy
+const roleOrder = [
+  'General Chair',
+  'Publication Chair', 
+  'Workshop Facilitator',
+  'Program Committee'
+];
+
+const sortedTeamMembers = publishedTeamMembers.sort((a, b) => {
+  const aIndex = roleOrder.indexOf(a.data.role);
+  const bIndex = roleOrder.indexOf(b.data.role);
+  
+  // If role not found in hierarchy, put at end
+  const aOrder = aIndex === -1 ? roleOrder.length : aIndex;
+  const bOrder = bIndex === -1 ? roleOrder.length : bIndex;
+  
+  return aOrder - bOrder;
+});
+
+// Function to generate random wiggly path
+function generateWigglyPath(seed: string) {
+  // Use seed to create deterministic randomness
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    const char = seed.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  
+  const random = (min: number, max: number, offset: number = 0) => {
+    const x = Math.sin(hash + offset) * 10000;
+    return min + (max - min) * (x - Math.floor(x));
+  };
+  
+  const centerX = 200;
+  const centerY = 200;
+  const baseRadius = 140;
+  
+  // Create many points for a very smooth curve
+  const totalPoints = 8;
+  const points: {x: number, y: number}[] = [];
+  
+  // Generate points with smooth radius variations using multiple sine waves
+  for (let i = 0; i < totalPoints; i++) {
+    const angle = (i / totalPoints) * 2 * Math.PI;
+    
+    // Layer multiple sine waves for organic variation
+    const wave1 = Math.sin(angle * 3 + random(0, Math.PI * 2, 1)) * random(8, 20, i);
+    const wave2 = Math.sin(angle * 5 + random(0, Math.PI * 2, 2)) * random(5, 12, i + 20);
+    const wave3 = Math.sin(angle * 7 + random(0, Math.PI * 2, 3)) * random(3, 8, i + 40);
+    
+    const radiusVariation = wave1 + wave2 + wave3;
+    const radius = baseRadius + radiusVariation;
+    
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+    
+    points.push({ x, y });
+  }
+  
+  // Start the path
+  let path = `M ${points[0].x} ${points[0].y}`;
+  
+  // Create ultra-smooth curves using cubic Bezier curves with better control points
+  for (let i = 0; i < totalPoints; i++) {
+    const current = points[i];
+    const next = points[(i + 1) % totalPoints];
+    const prev = points[(i - 1 + totalPoints) % totalPoints];
+    const nextNext = points[(i + 2) % totalPoints];
+    
+    // Calculate smooth control points using catmull-rom spline approach
+    const tension = 0.5; // Controls how tight the curves are - increased for smoother curves
+    
+    // First control point (outgoing from current)
+    const cp1Distance = Math.sqrt((next.x - current.x) ** 2 + (next.y - current.y) ** 2) * tension;
+    const cp1Angle = Math.atan2(next.y - prev.y, next.x - prev.x);
+    const cp1x = current.x + Math.cos(cp1Angle) * cp1Distance;
+    const cp1y = current.y + Math.sin(cp1Angle) * cp1Distance;
+    
+    // Second control point (incoming to next)
+    const cp2Distance = Math.sqrt((next.x - current.x) ** 2 + (next.y - current.y) ** 2) * tension;
+    const cp2Angle = Math.atan2(nextNext.y - current.y, nextNext.x - current.x);
+    const cp2x = next.x - Math.cos(cp2Angle) * cp2Distance;
+    const cp2y = next.y - Math.sin(cp2Angle) * cp2Distance;
+    
+    // Add very subtle organic variation to control points
+    const variation1 = random(-2, 2, i * 200);
+    const variation2 = random(-2, 2, i * 250);
+    
+    path += ` C ${cp1x + variation1} ${cp1y + variation1}, ${cp2x + variation2} ${cp2y + variation2}, ${next.x} ${next.y}`;
+  }
+  
+  path += " Z";
+  return path;
+}
 ---
 
-<div class="mt-16 md:mt-0 fade-in-section" id="organizers-section">
-    <h1 class="text-5xl lg:text-6xl xl:text-7xl text-center font-bold lg:tracking-tight xl:tracking-tighter">
-    Workshop Organizers
-    </h1>
+<Layout title="About">
+  <Container>
+    <div class="mt-16 md:mt-0 fade-in-section" id="organizers-section">
+      <h1 class="text-5xl lg:text-6xl xl:text-7xl text-center font-bold lg:tracking-tight xl:tracking-tighter">
+        Workshop Organizers
+      </h1>
+      <p class="text-lg mt-4 text-slate-600 max-w-xl mx-auto text-center">We are a small passionate team.</p>
 
-    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
-      {
-        publishedTeamMembers.map((teamMemberEntry) => (
-          <div class="group">
-            <div class="w-full aspect-square">
-              <Picture
-              src={teamMemberEntry.data.avatar.src}
-              alt={teamMemberEntry.data.avatar.alt}
-              sizes="(max-width: 800px) 100vw, 400px"
-              width={400}
-              height={400}
-              class="w-full rounded-full border-8 border-pink-500 transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square avatar-blur"
-              />
-            </div>
+        <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+          {sortedTeamMembers.map((teamMemberEntry, index) => {
+            const wigglyPath = generateWigglyPath(teamMemberEntry.slug);
+            // Add empty slot after the second person (General Chairs) to break the row
+            const shouldAddEmptySlot = index === 2;
+            
+            return (
+            <>
+              {shouldAddEmptySlot && (
+                <div class="hidden md:block"></div>
+              )}
+              <div class="group">
+                <div class="w-full aspect-square relative max-w-[240px] mx-auto">
+                  <div class="relative w-full h-full flex items-center justify-center">
+                    <Picture
+                    src={teamMemberEntry.data.avatar.src}
+                    alt={teamMemberEntry.data.avatar.alt}
+                    sizes="150px"
+                    width={150}
+                    height={150}
+                    class="w-[150px] h-[150px] rounded-full transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square grayscale group-hover:grayscale-0"
+                    />
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 400" width="240" height="240">
+                    <defs>
+                      <clipPath id={`wiggle-clip-${teamMemberEntry.slug}`}>
+                        <path d={wigglyPath} fill="white" stroke="none"/>
+                      </clipPath>
+                    </defs>
+                    <path d={wigglyPath} 
+                          fill="none" 
+                          stroke="#FF69B4" 
+                          stroke-width="12" 
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="wiggle-border"/>
+                  </svg>
+                </div>
+              </div>
 
-            <div class="mt-4 text-center">
-                <a href={teamMemberEntry.data.homepage} class="text-blue-500 hover:underline"
-                title={teamMemberEntry.data.name}>
-                <h2 class="text-lg text-gray-800 flex items-center justify-center space-x-2 underline">
-                <span class="font-bold">{teamMemberEntry.data.name}</span>
-                </h2>
-                </a>
-              <h3 class="text-md text-slate-500 mb-2">
-                {teamMemberEntry.data.affiliation}
-              </h3>
-
-              <p style="text-align: justify; text-justify: inter-word; word-break: break-word;">
-                {teamMemberEntry.data.description}
-              </p>
-            </div>
-          </div>
-        ))
-      }
+              <div class="mt-4 text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <a href={teamMemberEntry.data.homepage} class="text-blue-500 hover:underline"
+                    title={teamMemberEntry.data.name}>
+                    <h2 class="text-lg text-gray-800 underline">
+                    <span class="font-bold">{teamMemberEntry.data.name}</span>
+                    </h2>
+                    </a>
+                    {teamMemberEntry.data.linkedin && (
+                      <a href={teamMemberEntry.data.linkedin} target="_blank" rel="noopener" class="text-[#FF69B4] hover:text-[#E055A1] transition-colors">
+                        <Icon name="mdi:linkedin" class="w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
+                <h4 class="inline-flex items-center justify-center px-3 py-1 bg-[#FF69B4] text-white text-sm font-semibold rounded-full shadow-md hover:bg-[#E055A1] transition-colors duration-200 mb-2">
+                  {teamMemberEntry.data.role}
+                </h4>
+                <h3 class="text-md text-slate-500">
+                  {teamMemberEntry.data.affiliation}
+                </h3>
+                </div>
+              </div>
+            </>
+            )
+          })}
+        </div>
     </div>
-</div>
+
+  </Container>
+</Layout>
 
 <style>
   .fade-in-section {
@@ -63,6 +196,35 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
   .fade-in-section.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .wiggle-border {
+    animation: wiggle-float 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes wiggle-float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-2px) rotate(0.5deg);
+    }
+  }
+
+  .group:hover .wiggle-border {
+    stroke: #FF69B4;
+    stroke-width: 16;
+    animation: wiggle-hover 0.8s ease-in-out infinite;
+  }
+
+  @keyframes wiggle-hover {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translateY(-3px) rotate(-0.5deg) scale(1.02);
+    }
   }
 </style>
 

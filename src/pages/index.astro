@@ -8,16 +8,64 @@ import Layout from "@layouts/Layout.astro";
 import Topics from "@components/topics.astro";
 import About from "./about.astro";
 import Program from "@components/program.astro";
+import Archive from "@components/archive.astro";
+import Footer from "@components/footer.astro";
+
+// Import paper PDFs for 2025
+import Paper1 from "@assets/2025/paper1.pdf";
+import Paper2 from "@assets/2025/paper2.pdf";
+import Paper3 from "@assets/2025/paper3.pdf";
+import Paper4 from "@assets/2025/paper4.pdf";
+import Paper5 from "@assets/2025/paper5.pdf";
+import Paper6 from "@assets/2025/paper6.pdf";
+
+const papers2025 = [
+  {
+    title: "BattleGraphs: Forge, Fortify, and Fight in the Network Arena",
+    authors: "H. Ehlers, D. Pahr, S. di Bartolomeo, C. Stoiber, and V. Filipov",
+    pdfUrl: Paper1,
+    nightingaleUrl: "https://nightingaledvs.com/battlegraphs/"
+  },
+  {
+    title: "Cards, Charts, and Strategy: A Game-Based Approach to Data Visualization for Patterns",
+    authors: "A. Boucher and C. Stoiber",
+    pdfUrl: Paper2,
+    nightingaleUrl: "https://nightingaledvs.com/cards-charts-and-strategy/"
+  },
+  {
+    title: "Drawagram: A Game-Based Learning Approach to Teach Time-based Data Visualization and Visual Storytelling",
+    authors: "S. Plankensteiner and C. Stoiber",
+    pdfUrl: Paper3,
+    nightingaleUrl: "https://nightingaledvs.com/drawagram-a-game/"
+  },
+  {
+    title: "Grasping Data Through Play: Exploring Co-Design Activities for Children's Engagement with Personal Data",
+    authors: "D. Perera, D. Kaufmann, A. Ramírez-Duque, A. Atabey, S. Brewster, C. Wilson, J. Vines, L. Plowman, U. Hinrichs, and A. Manches",
+    pdfUrl: Paper4
+  },
+  {
+    title: "Leveraging Popular Board Games to Teach Data Visualization",
+    authors: "L. Amabili, M.E. Gröller, and R. G. Raidou",
+    pdfUrl: Paper5,
+    nightingaleUrl: "https://nightingaledvs.com/teach-data-viz-through-play/"
+  },
+  {
+    title: "Playing with Knowledge: Leveraging Visualization Games for Data Validation and Inspiration",
+    authors: "F. Becker, R. P. Warnking, and T. Blascheck",
+    pdfUrl: Paper6
+  }
+];
 ---
 
 <Layout title="VisGames Workshop">
   <Container>
     <Hero />
-    <Program />
+    <!-- <Program /> -->
     <Features />
     <Topics />
     <Pricing />
     <Cta />
     <About />
+    <Archive year={"2025"} papers={papers2025} />
   </Container>
 </Layout>
