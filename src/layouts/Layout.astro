@@ -4,8 +4,7 @@ import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
 import '@fontsource-variable/bricolage-grotesque';
-
-
+import backgroundImg from "@assets/background.png";
 
 export interface Props {
   title: string;
@@ -45,13 +44,28 @@ const makeTitle = title
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
   </head>
-  <body>
-    <slot />
+  <body style={`background-image: url(${backgroundImg.src}); background-size: 100% auto; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
+    <div class="min-h-screen w-full flex justify-center">
+      <div class="bg-white/95 backdrop-blur-sm max-w-screen-xl w-full shadow-xl">
+        <slot />
+      </div>
+    </div>
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {
         content-visibility: auto;
+      }
+      
+      /* Ensure full height coverage */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        min-height: 100vh;
       }
     </style>
 

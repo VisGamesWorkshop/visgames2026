@@ -19,7 +19,11 @@ const roleOrder = [
   'Program Committee'
 ];
 
-const sortedTeamMembers = publishedTeamMembers.sort((a, b) => {
+// Separate Program Committee members from others
+const programCommitteeMembers = publishedTeamMembers.filter(member => member.data.role === 'Program Committee');
+const otherTeamMembers = publishedTeamMembers.filter(member => member.data.role !== 'Program Committee');
+
+const sortedTeamMembers = otherTeamMembers.sort((a, b) => {
   const aIndex = roleOrder.indexOf(a.data.role);
   const bIndex = roleOrder.indexOf(b.data.role);
   
@@ -32,17 +36,9 @@ const sortedTeamMembers = publishedTeamMembers.sort((a, b) => {
 
 // Function to generate random wiggly path
 function generateWigglyPath(seed: string) {
-  // Use seed to create deterministic randomness
-  let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    const char = seed.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  
-  const random = (min: number, max: number, offset: number = 0) => {
-    const x = Math.sin(hash + offset) * 10000;
-    return min + (max - min) * (x - Math.floor(x));
+  // Use true random generation for each path
+  const random = (min: number, max: number) => {
+    return min + (max - min) * Math.random();
   };
   
   const centerX = 200;
@@ -58,9 +54,9 @@ function generateWigglyPath(seed: string) {
     const angle = (i / totalPoints) * 2 * Math.PI;
     
     // Layer multiple sine waves for organic variation
-    const wave1 = Math.sin(angle * 3 + random(0, Math.PI * 2, 1)) * random(8, 20, i);
-    const wave2 = Math.sin(angle * 5 + random(0, Math.PI * 2, 2)) * random(5, 12, i + 20);
-    const wave3 = Math.sin(angle * 7 + random(0, Math.PI * 2, 3)) * random(3, 8, i + 40);
+    const wave1 = Math.sin(angle * 3 + random(0, Math.PI * 2)) * random(8, 20);
+    const wave2 = Math.sin(angle * 5 + random(0, Math.PI * 2)) * random(5, 12);
+    const wave3 = Math.sin(angle * 7 + random(0, Math.PI * 2)) * random(3, 8);
     
     const radiusVariation = wave1 + wave2 + wave3;
     const radius = baseRadius + radiusVariation;
@@ -97,8 +93,8 @@ function generateWigglyPath(seed: string) {
     const cp2y = next.y - Math.sin(cp2Angle) * cp2Distance;
     
     // Add very subtle organic variation to control points
-    const variation1 = random(-2, 2, i * 200);
-    const variation2 = random(-2, 2, i * 250);
+    const variation1 = random(-2, 2);
+    const variation2 = random(-2, 2);
     
     path += ` C ${cp1x + variation1} ${cp1y + variation1}, ${cp2x + variation2} ${cp2y + variation2}, ${next.x} ${next.y}`;
   }
@@ -106,11 +102,98 @@ function generateWigglyPath(seed: string) {
   path += " Z";
   return path;
 }
+
+// Function to generate wiggly rectangle path for Program Committee boxes
+function generateWigglyRectPath(seed: string) {
+  // Use seed to create deterministic randomness
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    const char = seed.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  
+  const random = (min: number, max: number, offset: number = 0) => {
+    const x = Math.sin(hash + offset) * 10000;
+    return min + (max - min) * (x - Math.floor(x));
+  };
+  
+  // Rectangle dimensions with padding
+  const padding = 10;
+  const width = 300 - (padding * 2);
+  const height = 200 - (padding * 2);
+  const x = padding;
+  const y = padding;
+  
+  // Create wiggly points for the rectangle
+  const topPoints: {x: number, y: number}[] = [];
+  const rightPoints: {x: number, y: number}[] = [];
+  const bottomPoints: {x: number, y: number}[] = [];
+  const leftPoints: {x: number, y: number}[] = [];
+  
+  // Top edge
+  for (let i = 0; i <= 8; i++) {
+    const t = i / 8;
+    const wiggle = random(-8, 8, i * 100);
+    topPoints.push({
+      x: x + (width * t),
+      y: y + wiggle
+    });
+  }
+  
+  // Right edge  
+  for (let i = 1; i <= 7; i++) {
+    const t = i / 8;
+    const wiggle = random(-8, 8, i * 150);
+    rightPoints.push({
+      x: x + width + wiggle,
+      y: y + (height * t)
+    });
+  }
+  
+  // Bottom edge
+  for (let i = 7; i >= 0; i--) {
+    const t = i / 8;
+    const wiggle = random(-8, 8, i * 200);
+    bottomPoints.push({
+      x: x + (width * t),
+      y: y + height + wiggle
+    });
+  }
+  
+  // Left edge
+  for (let i = 6; i >= 1; i--) {
+    const t = i / 8;
+    const wiggle = random(-8, 8, i * 250);
+    leftPoints.push({
+      x: x + wiggle,
+      y: y + (height * t)
+    });
+  }
+  
+  // Combine all points
+  const allPoints = [...topPoints, ...rightPoints, ...bottomPoints, ...leftPoints];
+  
+  // Create smooth path using quadratic curves
+  let path = `M ${allPoints[0].x} ${allPoints[0].y}`;
+  
+  for (let i = 1; i < allPoints.length; i++) {
+    const current = allPoints[i];
+    const prev = allPoints[i - 1];
+    
+    // Control point for smooth curves
+    const cpX = prev.x + (current.x - prev.x) * 0.5;
+    const cpY = prev.y + (current.y - prev.y) * 0.5;
+    
+    path += ` Q ${cpX} ${cpY}, ${current.x} ${current.y}`;
+  }
+  
+  path += " Z";
+  return path;
+}
 ---
 
-<Layout title="About">
-  <Container>
-    <div class="mt-16 md:mt-0 fade-in-section" id="organizers-section">
+    <div class="mt-16 md:mt-0 fade-in-section p-8 m-4" id="organizers-section">
       <h1 class="text-5xl lg:text-6xl xl:text-7xl text-center font-bold lg:tracking-tight xl:tracking-tighter">
         Workshop Organizers
       </h1>
@@ -119,14 +202,8 @@ function generateWigglyPath(seed: string) {
         <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
           {sortedTeamMembers.map((teamMemberEntry, index) => {
             const wigglyPath = generateWigglyPath(teamMemberEntry.slug);
-            // Add empty slot after the second person (General Chairs) to break the row
-            const shouldAddEmptySlot = index === 2;
             
             return (
-            <>
-              {shouldAddEmptySlot && (
-                <div class="hidden md:block"></div>
-              )}
               <div class="group">
                 <div class="w-full aspect-square relative max-w-[240px] mx-auto">
                   <div class="relative w-full h-full flex items-center justify-center">
@@ -144,47 +221,92 @@ function generateWigglyPath(seed: string) {
                         <path d={wigglyPath} fill="white" stroke="none"/>
                       </clipPath>
                     </defs>
-                    <path d={wigglyPath} 
+                    <path id={`wiggle-path-${teamMemberEntry.slug}`}
+                          d={wigglyPath} 
                           fill="none" 
                           stroke="#FF69B4" 
                           stroke-width="12" 
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           class="wiggle-border"/>
-                  </svg>
-                </div>
-              </div>
-
-              <div class="mt-4 text-center">
-                  <div class="flex items-center justify-center gap-2 mb-2">
-                    <a href={teamMemberEntry.data.homepage} class="text-blue-500 hover:underline"
-                    title={teamMemberEntry.data.name}>
-                    <h2 class="text-lg text-gray-800 underline">
-                    <span class="font-bold">{teamMemberEntry.data.name}</span>
-                    </h2>
-                    </a>
-                    {teamMemberEntry.data.linkedin && (
-                      <a href={teamMemberEntry.data.linkedin} target="_blank" rel="noopener" class="text-[#FF69B4] hover:text-[#E055A1] transition-colors">
-                        <Icon name="mdi:linkedin" class="w-5 h-5" />
-                      </a>
-                    )}
+                      </svg>
+                    </div>
                   </div>
-                <h4 class="inline-flex items-center justify-center px-3 py-1 bg-[#FF69B4] text-white text-sm font-semibold rounded-full shadow-md hover:bg-[#E055A1] transition-colors duration-200 mb-2">
-                  {teamMemberEntry.data.role}
-                </h4>
-                <h3 class="text-md text-slate-500">
-                  {teamMemberEntry.data.affiliation}
-                </h3>
+
+                  <div class="mt-4 text-center">
+                      <div class="flex items-center justify-center gap-2 mb-2">
+                        <a href={teamMemberEntry.data.homepage} class="text-blue-500 hover:underline"
+                        title={teamMemberEntry.data.name}>
+                        <h2 class="text-lg text-gray-800 underline">
+                        <span class="font-bold">{teamMemberEntry.data.name}</span>
+                        </h2>
+                        </a>
+                        {teamMemberEntry.data.linkedin && (
+                          <a href={teamMemberEntry.data.linkedin} target="_blank" rel="noopener" class="text-[#FF69B4] hover:text-[#E055A1] transition-colors">
+                            <Icon name="mdi:linkedin" class="w-5 h-5" />
+                          </a>
+                        )}
+                      </div>
+                    <h4 class="inline-flex items-center justify-center px-3 py-1 bg-[#FF69B4] text-white text-sm font-semibold rounded-full shadow-md hover:bg-[#E055A1] transition-colors duration-200 mb-2">
+                      {teamMemberEntry.data.role}
+                    </h4>
+                    <h3 class="text-md text-slate-500">
+                      {teamMemberEntry.data.affiliation}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </>
             )
           })}
+        </div>        <!-- Program Committee Section -->
+        <div class="mt-16 p-8 m-4">
+          <h2 class="text-4xl lg:text-6xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter mb-8 text-black">
+            Program Committee
+          </h2>
+          <div class="max-w-4xl mx-auto">
+            <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+              {programCommitteeMembers.map((member, index) => {
+                return (
+                  <li class="bg-white rounded-lg p-6 hover:bg-gray-50 transition-colors shadow-lg border border-gray-100">
+                    <div class="relative inline-block">
+                      <div class="flex items-center justify-center gap-2">
+                        <a href={member.data.homepage} class="text-gray-800 hover:text-blue-600 text-lg font-bold relative z-10 transition-colors">
+                          {member.data.name}
+                        </a>
+                        {member.data.linkedin && (
+                          <a href={member.data.linkedin} target="_blank" rel="noopener" class="text-[#FF69B4] hover:text-[#E055A1] transition-colors relative z-10">
+                            <Icon name="mdi:linkedin" class="w-5 h-5" />
+                          </a>
+                        )}
+                      </div>
+                      <div class="absolute inset-0 bg-[#FF69B4] opacity-30 -skew-y-3 transform scale-x-125 scale-y-110 rounded-sm"></div>
+                    </div>
+                    <p class="text-md text-slate-600 mt-4">{member.data.affiliation}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Reviewers Section -->
+        <div class="mt-16 pb-16 p-8 m-4">
+          <h2 class="text-4xl lg:text-5xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter mb-4 text-black">
+            Reviewers
+          </h2>
+          <p class="text-lg mt-4 text-slate-600 max-w-2xl mx-auto text-center mb-8">
+            We would like to thank our dedicated reviewers for their valuable contributions to maintaining the quality of our workshop submissions.
+          </p>
+          <div class="max-w-4xl mx-auto text-center">
+            <p class="text-lg text-slate-700 italic mb-4">
+              Reviewer list will be published after the review process is complete.
+            </p>
+            <p class="text-md text-slate-600">
+              Thank you to all our volunteer reviewers for their time and expertise!
+            </p>
+          </div>
         </div>
     </div>
 
-  </Container>
-</Layout>
 
 <style>
   .fade-in-section {
@@ -201,6 +323,7 @@ function generateWigglyPath(seed: string) {
   .wiggle-border {
     animation: wiggle-float 3s ease-in-out infinite;
     transform-origin: center;
+    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @keyframes wiggle-float {
@@ -212,21 +335,48 @@ function generateWigglyPath(seed: string) {
     }
   }
 
+  /* Pause floating animation on hover */
   .group:hover .wiggle-border {
-    stroke: #FF69B4;
-    stroke-width: 16;
-    animation: wiggle-hover 0.8s ease-in-out infinite;
-  }
-
-  @keyframes wiggle-hover {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg) scale(1);
-    }
-    50% {
-      transform: translateY(-3px) rotate(-0.5deg) scale(1.02);
-    }
+    animation-play-state: paused;
   }
 </style>
+
+<script>
+  // Function to generate a perfect circle path
+  function generateCirclePath() {
+    const centerX = 200;
+    const centerY = 200;
+    const radius = 140;
+    return `M ${centerX - radius} ${centerY} 
+            A ${radius} ${radius} 0 1 1 ${centerX + radius} ${centerY} 
+            A ${radius} ${radius} 0 1 1 ${centerX - radius} ${centerY} Z`;
+  }
+
+  // Add hover animations to all team member cards
+  document.addEventListener('DOMContentLoaded', function() {
+    const teamCards = document.querySelectorAll('.group');
+    const circlePath = generateCirclePath();
+    
+    teamCards.forEach((card) => {
+      const wigglePath = card.querySelector('.wiggle-border') as SVGPathElement;
+      if (wigglePath) {
+        const originalPath = wigglePath.getAttribute('d');
+        
+        // Mouse enter - morph to circle
+        card.addEventListener('mouseenter', () => {
+          wigglePath.setAttribute('d', circlePath);
+        });
+        
+        // Mouse leave - morph back to wiggly
+        card.addEventListener('mouseleave', () => {
+          if (originalPath) {
+            wigglePath.setAttribute('d', originalPath);
+          }
+        });
+      }
+    });
+  });
+</script>
 
 <script>
   const observerOptions = {

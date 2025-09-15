@@ -4,7 +4,7 @@ name: "Julia Böck "
 affiliation: "St. Pölten University of Applied Sciences"
 role: "Program Committee"
 avatar: {
-    src: "https://hips.hearstapps.com/hmg-prod/images/keanu-reeves-9454211-1-402.jpg",
+    src: "https://img.etimg.com/thumb/msid-113060171,width-650,height-488,imgsize-712173,resizemode-75/keanu-reeves.jpg",
     alt: "Julia Böck "
 }
 description: ""

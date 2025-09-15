@@ -4,7 +4,7 @@ name: "Mandy Keck"
 affiliation: "University of Applied Sciences Upper Austria"
 role: "Program Committee"
 avatar: {
-    src: "https://img.etimg.com/thumb/msid-113060171,width-650,height-488,imgsize-712173,resizemode-75/keanu-reeves.jpg",
+    src: "https://i.insider.com/5d88aaf22e22af1246456c0d?width=1200&format=jpeg",
     alt: "Mandy Keck"
 }
 description: "Mandy is a professor in UX and Interaction Design at the University of Applied Sciences Upper Austria. Her research focuses on visual exploration of multivariate information spaces, data visualization literacy and education, and interaction design."

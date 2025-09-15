@@ -4,7 +4,7 @@ name: "Victor Oliveira"
 affiliation: "St. Pölten University of Applied Sciences"
 role: "Publication Chair"
 avatar: {
-    src: "https://media.newyorker.com/photos/5cf5728d47f7cc877a506d9b/master/w_1920,c_limit/Fry-KeanuReeves-2.jpg",
+    src: "./../../assets/pictures/victor.jpg",
     alt: "Victor-Adriel De-Jesus-Oliveira"
 }
 description: "Victor is a lecturer and researcher at St. Pölten University of Applied Sciences. He is currently exploring situated data visualization, sonification, and quantitative user experience, among other topics. "

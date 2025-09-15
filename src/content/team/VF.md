@@ -4,7 +4,7 @@ name: "Velitchko Filipov"
 affiliation: "TU Wien"
 role: "General Chair"
 avatar: {
-    src: "https://variety.com/wp-content/uploads/2020/12/Keanu_Reeves.png",
+    src: "./../../assets/pictures/velitchko.jpg",
     alt: "Velitchko Filipov"
 }
 description: "Velitchko is a Postdoctoral researcher in the Visual Analytics research unit (CVAST), TU Wien. His research interests include information visualization and visual analytics of dynamic graphs and networks."

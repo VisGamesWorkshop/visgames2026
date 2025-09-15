@@ -4,7 +4,7 @@ name: "Renata Raidou"
 affiliation: "TU Wien"
 role: "Workshop Facilitator"
 avatar: {
-    src: "https://www.looper.com/img/gallery/what-happened-to-the-puppy-from-john-wick/intro-1660697849.webp",
+    src: "./../../assets/pictures/renata.jpg",
     alt: "Renata Raidou"
 }
 description: "Renata is an assistant professor in at TU Wien, Austria.  Her research direction is on the interface between visual analytics, image processing, and machine learning, with a strong focus on biomedical applications."
