@@ -22,7 +22,7 @@ const makeTitle = title
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <!-- HTML Meta Tags -->
     <meta name="description" content="This is the first EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2025 conference.">
@@ -44,7 +44,7 @@ const makeTitle = title
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
   </head>
-  <body style={`background-image: url(${backgroundImg.src}); background-size: 100% auto; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
+  <body style={`background-image: url(${backgroundImg.src}); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
     <div class="min-h-screen w-full flex justify-center">
       <div class="bg-white/95 backdrop-blur-sm max-w-screen-xl w-full shadow-xl">
         <slot />
