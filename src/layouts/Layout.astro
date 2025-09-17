@@ -3,7 +3,7 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
-import '@fontsource-variable/bricolage-grotesque';
+import "@fontsource-variable/bricolage-grotesque";
 import backgroundImg from "@assets/background.png";
 
 export interface Props {
@@ -16,38 +16,56 @@ const makeTitle = title
   : "Astroship - Starter Template for Astro with Tailwind CSS";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <title>{makeTitle}</title>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
-    <!-- HTML Meta Tags -->
-    <meta name="description" content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference.">
 
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://visgames.netlify.app/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="VisGames 2026 Workshop">
-    <meta property="og:description" content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference.">
-    <meta property="og:image" content="https://visgames.netlify.app/opengraph.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="generator" content={Astro.generator} />
+  <!-- HTML Meta Tags -->
+  <meta
+    name="description"
+    content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference."
+  />
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="visgames.netlify.app">
-    <meta property="twitter:url" content="https://visgames.netlify.app/">
-    <meta name="twitter:title" content="Visgames 2026 Workshop">
-    <meta name="twitter:description" content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference.">
-    <meta name="twitter:image" content="https://visgames.netlify.app/opengraph.png">
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://visgames.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VisGames 2026 Workshop" />
+  <meta
+    property="og:description"
+    content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference."
+  />
+  <meta
+    property="og:image"
+    content="https://visgames.netlify.app/opengraph.png"
+  />
 
-    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
-  </head>
-  <body style={`background-image: url(${backgroundImg.src}); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="twitter:domain" content="visgames.netlify.app" />
+  <meta property="twitter:url" content="https://visgames.netlify.app/" />
+  <meta name="twitter:title" content="Visgames 2026 Workshop" />
+  <meta
+    name="twitter:description"
+    content="This is the second EuroVis Workshop on Visualization Play, Games, and Activities that is collocated with the EuroVis 2026 conference."
+  />
+  <meta
+    name="twitter:image"
+    content="https://visgames.netlify.app/opengraph.png"
+  />
+
+  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
+  <body
+    style={`background-image: url(${backgroundImg.src}); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
     <div class="min-h-screen w-full flex justify-center">
-      <div class="bg-white/95 backdrop-blur-sm max-w-screen-xl w-full shadow-xl">
+      <div
+        class="bg-white/95 backdrop-blur-sm max-w-screen-xl w-full shadow-xl">
         <slot />
+        <Footer />
       </div>
     </div>
     <style is:global>
@@ -56,19 +74,18 @@ const makeTitle = title
       img {
         content-visibility: auto;
       }
-      
+
       /* Ensure full height coverage */
-      html, body {
+      html,
+      body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-      
+
       body {
         min-height: 100vh;
       }
     </style>
-
-    <!-- <Footer /> -->
   </body>
 </html>
