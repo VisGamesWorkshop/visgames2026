@@ -2,7 +2,7 @@
 draft: false
 name: "Hsiang-Yun Wu"
 affiliation: "St. Pölten University of Applied Sciences"
-role: "Program Committee"
+role: "Publication Chair"
 avatar: {
     src: "./../../assets/pictures/yun.jpg",
     alt: "Hsiang-Yun Wu"

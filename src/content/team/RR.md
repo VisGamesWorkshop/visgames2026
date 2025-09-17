@@ -2,7 +2,7 @@
 draft: false
 name: "Renata Raidou"
 affiliation: "TU Wien"
-role: "Workshop Facilitator"
+role: "Workshop Chair"
 avatar: {
     src: "./../../assets/pictures/renata.jpg",
     alt: "Renata Raidou"

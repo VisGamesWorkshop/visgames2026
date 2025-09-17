@@ -14,8 +14,9 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
 // Sort team members by role hierarchy
 const roleOrder = [
   'General Chair',
+  'Co-Chair',
+  'Workshop Chair',
   'Publication Chair', 
-  'Workshop Facilitator',
   'Program Committee'
 ];
 
@@ -102,95 +103,6 @@ function generateWigglyPath(seed: string) {
   path += " Z";
   return path;
 }
-
-// Function to generate wiggly rectangle path for Program Committee boxes
-function generateWigglyRectPath(seed: string) {
-  // Use seed to create deterministic randomness
-  let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    const char = seed.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  
-  const random = (min: number, max: number, offset: number = 0) => {
-    const x = Math.sin(hash + offset) * 10000;
-    return min + (max - min) * (x - Math.floor(x));
-  };
-  
-  // Rectangle dimensions with padding
-  const padding = 10;
-  const width = 300 - (padding * 2);
-  const height = 200 - (padding * 2);
-  const x = padding;
-  const y = padding;
-  
-  // Create wiggly points for the rectangle
-  const topPoints: {x: number, y: number}[] = [];
-  const rightPoints: {x: number, y: number}[] = [];
-  const bottomPoints: {x: number, y: number}[] = [];
-  const leftPoints: {x: number, y: number}[] = [];
-  
-  // Top edge
-  for (let i = 0; i <= 8; i++) {
-    const t = i / 8;
-    const wiggle = random(-8, 8, i * 100);
-    topPoints.push({
-      x: x + (width * t),
-      y: y + wiggle
-    });
-  }
-  
-  // Right edge  
-  for (let i = 1; i <= 7; i++) {
-    const t = i / 8;
-    const wiggle = random(-8, 8, i * 150);
-    rightPoints.push({
-      x: x + width + wiggle,
-      y: y + (height * t)
-    });
-  }
-  
-  // Bottom edge
-  for (let i = 7; i >= 0; i--) {
-    const t = i / 8;
-    const wiggle = random(-8, 8, i * 200);
-    bottomPoints.push({
-      x: x + (width * t),
-      y: y + height + wiggle
-    });
-  }
-  
-  // Left edge
-  for (let i = 6; i >= 1; i--) {
-    const t = i / 8;
-    const wiggle = random(-8, 8, i * 250);
-    leftPoints.push({
-      x: x + wiggle,
-      y: y + (height * t)
-    });
-  }
-  
-  // Combine all points
-  const allPoints = [...topPoints, ...rightPoints, ...bottomPoints, ...leftPoints];
-  
-  // Create smooth path using quadratic curves
-  let path = `M ${allPoints[0].x} ${allPoints[0].y}`;
-  
-  for (let i = 1; i < allPoints.length; i++) {
-    const current = allPoints[i];
-    const prev = allPoints[i - 1];
-    
-    // Control point for smooth curves
-    const cpX = prev.x + (current.x - prev.x) * 0.5;
-    const cpY = prev.y + (current.y - prev.y) * 0.5;
-    
-    path += ` Q ${cpX} ${cpY}, ${current.x} ${current.y}`;
-  }
-  
-  path += " Z";
-  return path;
-}
 ---
 
     <div class="mt-16 md:mt-0 fade-in-section p-8 m-4" id="organizers-section">
@@ -262,29 +174,25 @@ function generateWigglyRectPath(seed: string) {
           <h2 class="text-4xl lg:text-6xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter mb-8 text-black">
             Program Committee
           </h2>
-          <div class="max-w-4xl mx-auto">
-            <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-              {programCommitteeMembers.map((member, index) => {
-                return (
-                  <li class="bg-white rounded-lg p-6 hover:bg-gray-50 transition-colors shadow-lg border border-gray-100">
-                    <div class="relative inline-block">
-                      <div class="flex items-center justify-center gap-2">
-                        <a href={member.data.homepage} class="text-gray-800 hover:text-blue-600 text-lg font-bold relative z-10 transition-colors">
-                          {member.data.name}
-                        </a>
-                        {member.data.linkedin && (
-                          <a href={member.data.linkedin} target="_blank" rel="noopener" class="text-[#FF69B4] hover:text-[#E055A1] transition-colors relative z-10">
-                            <Icon name="mdi:linkedin" class="w-5 h-5" />
-                          </a>
-                        )}
-                      </div>
-                      <div class="absolute inset-0 bg-[#FF69B4] opacity-30 -skew-y-3 transform scale-x-125 scale-y-110 rounded-sm"></div>
-                    </div>
-                    <p class="text-md text-slate-600 mt-4">{member.data.affiliation}</p>
-                  </li>
-                );
-              })}
-            </ul>
+          <div class="max-w-4xl mx-auto text-center">
+            <div class="p-8">
+              <div class="flex items-center justify-center mb-4">
+                <span class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse relative overflow-hidden">
+                  <span class="relative z-10">Coming Soon</span>
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -skew-x-12 animate-shimmer"></div>
+                </span>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">Building Our Program Committee</h3>
+              <p class="text-lg text-slate-600 mb-4">
+                We are currently sending out invitations to distinguished researchers and experts in the field of visualization and games to join our Program Committee.
+              </p>
+              <p class="text-lg text-slate-600 mb-4">
+                We will update this section once we have received responses from our invitees.
+              </p>
+              <p class="text-lg text-slate-600 font-semibold text-[#FF69B4]">
+                We look forward to announcing a vibrant and diverse Program Committee soon!
+              </p>
+            </div>
           </div>
         </div>
 
@@ -333,6 +241,19 @@ function generateWigglyRectPath(seed: string) {
     50% {
       transform: translateY(-2px) rotate(0.5deg);
     }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
   }
 
   /* Pause floating animation on hover */

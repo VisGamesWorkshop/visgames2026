@@ -38,7 +38,10 @@ import Proposal from "assets/proposal.pdf";
         </div>
         <div>
           <div class="flex items-center gap-2 mb-2">
-            <span class="bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">NEW</span>
+            <span class="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse relative overflow-hidden">
+              <span class="relative z-10">NEW</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -skew-x-12 animate-shimmer"></div>
+            </span>
             <h3 class="font-semibold text-lg group-hover:text-white transition-all duration-300">VisGames Challenge</h3>
           </div>
           <p class="text-slate-500 mt-2 leading-relaxed group-hover:text-white transition-all duration-300">A hands-on co-design, play-testing session. Teams of 4-6 members will design innovative games using the Five Design Sheets methodology, brainstorm ideas, define audiences and rules, and create mini-test scenarios. </p>
@@ -114,6 +117,19 @@ import Proposal from "assets/proposal.pdf";
   .fade-in-section.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
   }
 </style>
 

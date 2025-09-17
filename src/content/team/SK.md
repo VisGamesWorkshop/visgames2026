@@ -2,7 +2,7 @@
 draft: false
 name: "Simone Kriglstein"
 affiliation: "Masaryk University"
-role: "Program Committee"
+role: "Publication Chair"
 avatar: {
     src: "./../../assets/pictures/simone.jpg",
     alt: "Simone Kriglstein"
