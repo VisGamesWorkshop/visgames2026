@@ -18,6 +18,7 @@ import Paper3 from "@assets/2025/paper3.pdf";
 import Paper4 from "@assets/2025/paper4.pdf";
 import Paper5 from "@assets/2025/paper5.pdf";
 import Paper6 from "@assets/2025/paper6.pdf";
+import Socials from "@components/socials.astro";
 
 const papers2025 = [
   {
@@ -60,10 +61,11 @@ const papers2025 = [
 <Layout title="VisGames Workshop">
   <Container>
     <Hero />
+    <Pricing />
     <Program />
     <Features />
     <Topics />
-    <!-- <Pricing /> -->
+    <Socials />
     <Cta />
     <About />
     <Archive year={"2025"} papers={papers2025} />
