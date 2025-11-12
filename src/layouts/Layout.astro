@@ -2,6 +2,7 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
+import { Icon } from "astro-icon/components";
 import "@fontsource-variable/inter/index.css";
 import "@fontsource-variable/bricolage-grotesque";
 import backgroundImg from "@assets/background.png";
@@ -61,7 +62,26 @@ const makeTitle = title
 
   <body
     style={`background-image: url(${backgroundImg.src}); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;`}>
-    <div class="min-h-screen w-full flex justify-center">
+    
+    <!-- Fixed Social Media Bar -->
+    <div class="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+      <div class="flex items-center gap-4 px-5 py-3 bg-[#FF69B4] rounded-full shadow-xl">
+        <a href="https://www.linkedin.com/company/visgamesworkshop" target="_blank" rel="noopener" 
+           class="flex items-center justify-center w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full transition-all duration-300 hover:scale-110">
+          <Icon name="mdi:linkedin" class="w-6 h-6 text-white" />
+        </a>
+        <a href="https://discord.gg/PXuNxFPSjc" target="_blank" rel="noopener" 
+           class="flex items-center justify-center w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full transition-all duration-300 hover:scale-110">
+          <Icon name="mdi:discord" class="w-6 h-6 text-white" />
+        </a>
+        <a href="https://www.youtube.com/@visgames.workshop" target="_blank" rel="noopener" 
+           class="flex items-center justify-center w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full transition-all duration-300 hover:scale-110">
+          <Icon name="mdi:youtube" class="w-6 h-6 text-white" />
+        </a>
+      </div>
+    </div>
+    
+    <div class="min-h-screen w-full flex justify-center pt-12">
       <div
         class="bg-white/95 backdrop-blur-sm max-w-screen-xl w-full shadow-xl">
         <slot />
