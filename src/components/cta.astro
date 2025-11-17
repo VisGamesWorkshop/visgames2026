@@ -23,32 +23,52 @@ import { Icon } from "astro-icon/components";
 <div class="flex mt-5">
   <Link
     size="lg"
-    style="outline"
+    style="primary"
     rel="noopener"
     href="/template.zip"
-    class="flex gap-1 items-center justify-center hover:bg-gray-700 hover:text-white"
-    target="_blank"
-    href="javascript:void(0)"
-    class="flex gap-1 ml-2 items-center justify-center cursor-not-allowed opacity-50 bg-gray-700 text-white hover:bg-gray-700 hover:text-white hover:opacity-50"
-    disabled>
+    class="flex font-bold gap-2 items-center justify-center bg-[#7A0F44] text-white hover:bg-[#5E0B33] shadow-lg shadow-black/20"
+    download="template.zip">
     <Icon class="text-white w-8 h-8" name="bx:download" />
     VisGames Template
   </Link>
   <Link
     size="lg"
-    style="outline"
+    style="muted"
     rel="noopener"
     target="_blank"
-    href="javascript:void(0)"
-    class="flex gap-1 ml-2 items-center justify-center cursor-not-allowed opacity-50 bg-gray-700 text-white hover:bg-gray-700 hover:text-white hover:opacity-50"
-    disabled>
-    <Icon class="text-white w-8 h-8" name="bx:upload" />
+    href="https://new.precisionconference.com/submissions"
+    class="flex font-bold gap-2 ml-2 items-center justify-center bg-white text-[#7A0F44] hover:bg-[#FFE3F0] border border-[#7A0F44] shadow-lg shadow-[#7A0F44]/20">
+    <Icon class="text-[#7A0F44] w-8 h-8" name="bx:upload" />
     Submit to PCS
   </Link>
 </div>
-  <p class="text-black bold mt-4 text-lg md:text-xl">
-    Select Society: Eurographics, Conference: EuroVis 2026, Track: EuroVis 2026 VisGames
-  </p>
+  <div class="w-full mt-4 text-black text-lg md:text-xl">
+    <p class="font-semibold">Submission via PCS system:</p>
+    <p class="mt-2">
+      <span class="inline-flex flex-wrap items-center gap-2 md:gap-3">
+        <span><span class="font-bold">Society:</span> Eurographics</span>
+        <span aria-hidden="true" class="text-black font-bold">&rarr;</span>
+        <span><span class="font-bold">Conference:</span> EuroVis 2026</span>
+        <span aria-hidden="true" class="text-black font-bold">&rarr;</span>
+        <span><span class="font-bold">Track:</span> EuroVis 2026 VisGames</span>
+      </span>
+    </p>
+  </div>
+
+  <div class="w-full mt-4 rounded-lg bg-gradient-to-r p-px bg-white shadow-lg shadow-black/20">
+    <div class="h-full w-full rounded-lg bg-white/92 px-3 py-2 text-[#320C1C]">
+      <p class="text-md md:text-sm font-semibold flex items-center gap-1 text-black">
+        <Icon name="mdi:alert-circle-outline" class="text-[#C21874] w-5 h-5" />
+        Important LaTeX step for VisGames submissions
+      </p>
+      <p class="mt-1 text-xs md:text-sm">
+        In the EuroVis LaTeX template, make sure the VisGames command is <span class="font-bold">uncommented</span> so your paper is routed correctly:
+      </p>
+      <div class="text-sm md:text-base bg-[#17092E] text-[#A3BFFF] rounded-md p-4">
+        <span class="text-[#8CC0FF] font-mono">\EuroVisVisGames</span><span class="text-[#FFB6E1] font-mono"> % uncomment for VisGames contribution</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
