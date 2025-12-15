@@ -10,6 +10,8 @@ import About from "./about.astro";
 import Program from "@components/program.astro";
 import Archive from "@components/archive.astro";
 import Footer from "@components/footer.astro";
+import Committee from "@components/committee.astro";
+import Reviewers from "@components/reviewers.astro";
 
 // Import paper PDFs for 2025
 import Paper1 from "@assets/2025/paper1.pdf";
@@ -68,6 +70,8 @@ const papers2025 = [
     <Socials />
     <Cta />
     <About />
+    <Committee />
+    <Reviewers />
     <Archive year={"2025"} papers={papers2025} />
   </Container>
 </Layout>

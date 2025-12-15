@@ -169,49 +169,6 @@ function generateWigglyPath(seed: string) {
                 </div>
             )
           })}
-        </div>        <!-- Program Committee Section -->
-        <div class="mt-16 p-8 m-4">
-          <h2 class="text-4xl lg:text-6xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter mb-8 text-black">
-            Program Committee
-          </h2>
-          <div class="max-w-4xl mx-auto text-center">
-            <div class="p-8">
-              <div class="flex items-center justify-center mb-4">
-                <span class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse relative overflow-hidden">
-                  <span class="relative z-10">Coming Soon</span>
-                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -skew-x-12 animate-shimmer"></div>
-                </span>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-800 mb-4">Building Our Program Committee</h3>
-              <p class="text-lg text-slate-600 mb-4">
-                We are currently sending out invitations to distinguished researchers and experts in the field of visualization and games to join our Program Committee.
-              </p>
-              <p class="text-lg text-slate-600 mb-4">
-                We will update this section once we have received responses from our invitees.
-              </p>
-              <p class="text-lg text-slate-600 font-semibold text-[#FF69B4]">
-                We look forward to announcing a vibrant and diverse Program Committee soon!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Reviewers Section -->
-        <div class="mt-16 pb-16 p-8 m-4">
-          <h2 class="text-4xl lg:text-5xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter mb-4 text-black">
-            Reviewers
-          </h2>
-          <p class="text-lg mt-4 text-slate-600 max-w-2xl mx-auto text-center mb-8">
-            We would like to thank our dedicated reviewers for their valuable contributions to maintaining the quality of our workshop submissions.
-          </p>
-          <div class="max-w-4xl mx-auto text-center">
-            <p class="text-lg text-slate-700 italic mb-4">
-              Reviewer list will be published after the review process is complete.
-            </p>
-            <p class="text-md text-slate-600">
-              Thank you to all our volunteer reviewers for their time and expertise!
-            </p>
-          </div>
         </div>
     </div>
 
@@ -241,19 +198,6 @@ function generateWigglyPath(seed: string) {
     50% {
       transform: translateY(-2px) rotate(0.5deg);
     }
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%) skewX(-12deg);
-    }
-    100% {
-      transform: translateX(200%) skewX(-12deg);
-    }
-  }
-
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
   }
 
   /* Pause floating animation on hover */
