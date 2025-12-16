@@ -31,6 +31,7 @@ const rawMembers = [
   { name: "Eschner, Johannes", affiliation: "TU Wien" },
   { name: "Kriglstein, Simone", affiliation: "Masaryk University" },
   { name: "Größbacher, Stefanie", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Kejstová, Magdaléna", affiliation: "Masaryk University" }
 ];
 
 // Convert names from "LastName, FirstName" to "FirstName LastName" and sort alphabetically by last name
@@ -41,7 +42,7 @@ const committeeMembers = rawMembers.map(member => {
     lastName: lastName,
     affiliation: member.affiliation
   };
-}).sort((a, b) => a.lastName.localeCompare(b.lastName));
+}).sort(() => Math.random() - 0.5);
 ---
 
 <main class="pb-8 md:pt-12 md:pb-12 fade-in-section" data-fade>
