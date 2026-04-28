@@ -1,37 +1,93 @@
 ---
-// Reviewers component
+const reviewers = [
+  { name: "Aline Menin", affiliation: "INRIA Saclay" },
+  { name: "Christina Stoiber", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Daniela De Angeli", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Davide Ceneda", affiliation: "TU Eindhoven" },
+  { name: "Fateme Rajabiyazdi", affiliation: "University of Calgary" },
+  { name: "Franziska Becker", affiliation: "University of Stuttgart" },
+  { name: "Hsiang-Yun Wu", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Lorenzo Amabili", affiliation: "Buzzi RTD" },
+  { name: "Magdalena Boucher", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Mandy Keck", affiliation: "University of Applied Sciences Upper Austria" },
+  { name: "Petra Isenberg", affiliation: "INRIA Saclay" },
+  { name: "Stefanie Größbacher", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Till Nagel", affiliation: "Technische Hochschule Mannheim" },
+  { name: "Victor Adriel de Jesus Oliveira", affiliation: "University of Applied Sciences St. Pölten" },
+  { name: "Vit Rusnak", affiliation: "Masaryk University" }
+];
 ---
 
-<main class="pb-8 md:pt-12 md:pb-12 fade-in-section" data-fade>
-  <div class="max-w-5xl mx-auto p-8">
+<main id="reviewers" class="relative overflow-hidden pb-8 md:pt-12 md:pb-12 fade-in-section" data-fade>
+  <div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-r from-[#FFB6C1]/30 via-white to-[#93C5FD]/30 opacity-80 blur-3xl"></div>
+  <div class="max-w-5xl mx-auto p-8 relative">
     <!-- Header Section -->
-    <div class="text-center mb-12">
-      <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight mb-6">
-        Reviewers
+    <div class="text-center mb-12 relative z-10">
+      <span class="inline-flex items-center gap-2 rounded-full bg-[#FF69B4]/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#FF358B] shadow-sm">
+        <span>Reviewers</span>
+      </span>
+      <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight mb-4 mt-6 text-slate-900">
+        Our Reviewers
       </h2>
       <p class="text-lg mt-4 text-slate-600 max-w-2xl mx-auto">
-        We would like to thank our dedicated reviewers for their valuable contributions to maintaining the quality of our workshop submissions.
+        We want to thank the following reviewers for their thoughtful feedback, expert judgement, and help shaping the VisGames 2026 program.
       </p>
     </div>
 
-    <!-- Reviewers Content -->
-    <div class="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-      <div class="text-center">
-        <div class="inline-flex items-center justify-center mb-6">
-          <span class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white text-sm font-bold px-6 py-3 rounded-full shadow-lg relative overflow-hidden">
-            <span class="relative z-10">Coming After Review Process</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -skew-x-12 animate-shimmer"></div>
-          </span>
-        </div>
-        
-        <p class="text-lg text-slate-700 italic mb-4">
-          Reviewer list will be published after the review process is complete.
-        </p>
-        
-        <p class="text-md text-slate-600">
-          Thank you to all our volunteer reviewers for their time and expertise!
+    <div class="relative z-10 mt-8 flex justify-center overflow-hidden">
+      <span class="confetti-piece confetti-one"></span>
+      <span class="confetti-piece confetti-two"></span>
+      <span class="confetti-piece confetti-three"></span>
+      <span class="confetti-piece confetti-four"></span>
+      <span class="confetti-piece confetti-five"></span>
+    </div>
+
+    <div class="relative z-10">
+      <div class="rounded-lg border border-slate-200 bg-white p-8 shadow-sm">
+        <p class="text-sm uppercase tracking-[0.24em] text-slate-500 text-bold">Thank you!</p>
+        <p class="mt-3 text-4xl font-semibold text-slate-900">🌟 15 reviewers</p>
+        <p class="mt-6 max-w-2xl text-slate-600 leading-relaxed">
+          These reviewers contributed their time, expertise, and thoughtful feedback to the workshop review process.
         </p>
       </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {reviewers.map((reviewer, index) => {
+        const seed = index * 7;
+        const sparkles = [
+          { top: 10 + (seed % 15), right: 15 + (seed % 20), delay: 0, size: 14 + (seed % 4) },
+          { top: 40 + (seed % 25), right: 10 + (seed % 15), delay: 0.15, size: 16 + (seed % 4) },
+          { top: 20 + (seed % 20), left: 15 + (seed % 18), delay: 0.3, size: 15 + (seed % 3) },
+          { top: 60 + (seed % 20), left: 20 + (seed % 25), delay: 0.45, size: 17 + (seed % 4) },
+          { top: 30 + (seed % 25), right: 30 + (seed % 20), delay: 0.6, size: 14 + (seed % 5) }
+        ];
+        
+        return (
+          <div class="group relative overflow-hidden rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#FF69B4]/50">
+            <div class="absolute inset-0 pointer-events-none">
+              {sparkles.map((sparkle, i) => (
+                <span 
+                  class="sparkle"
+                  style={`
+                    top: ${sparkle.top}%; 
+                    ${sparkle.right !== undefined ? `right: ${sparkle.right}%` : `left: ${sparkle.left}%`}; 
+                    animation-delay: ${sparkle.delay}s; 
+                    font-size: ${sparkle.size}px;
+                  `}
+                ></span>
+              ))}
+            </div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2">
+                <span class="text-[#F472B6] text-xl">✦</span>
+                <p class="text-lg font-semibold text-slate-900">{reviewer.name}</p>
+              </div>
+              <p class="mt-2 text-sm text-slate-500">{reviewer.affiliation}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   </div>
 </main>
@@ -48,17 +104,101 @@
     transform: translateY(0);
   }
 
-  @keyframes shimmer {
+  .sparkle {
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 6px;
+    opacity: 0;
+    animation: none;
+  }
+
+  .sparkle::before {
+    content: '✨';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+  }
+
+  .group:hover .sparkle {
+    animation: sparkle 1.5s ease-out infinite;
+  }
+
+  @keyframes sparkle {
     0% {
-      transform: translateX(-100%) skewX(-12deg);
+      transform: scale(0) rotate(0deg);
+      opacity: 0;
     }
-    100% {
-      transform: translateX(200%) skewX(-12deg);
+    15% {
+      transform: scale(1.2) rotate(90deg);
+      opacity: 1;
+    }
+    30% {
+      transform: scale(1) rotate(180deg);
+      opacity: 0.8;
+    }
+    45% {
+      transform: scale(0.8) rotate(270deg);
+      opacity: 0.5;
+    }
+    60%, 100% {
+      transform: scale(0) rotate(360deg);
+      opacity: 0;
     }
   }
 
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
+  .confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 16px;
+    border-radius: 9999px;
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+    animation: confetti 1s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+  }
+
+  .confetti-one {
+    left: 22%;
+    background: #f472b6;
+    animation-delay: 0.05s;
+  }
+
+  .confetti-two {
+    left: 35%;
+    background: #60a5fa;
+    animation-delay: 0.12s;
+  }
+
+  .confetti-three {
+    left: 50%;
+    background: #fbbf24;
+    animation-delay: 0.18s;
+  }
+
+  .confetti-four {
+    left: 65%;
+    background: #a78bfa;
+    animation-delay: 0.22s;
+  }
+
+  .confetti-five {
+    left: 78%;
+    background: #34d399;
+    animation-delay: 0.28s;
+  }
+
+  @keyframes confetti {
+    0% {
+      opacity: 0;
+      transform: translateY(0) rotate(0deg);
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(92px) rotate(360deg);
+    }
   }
 </style>
 
