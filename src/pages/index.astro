@@ -22,6 +22,41 @@ import Paper5 from "@assets/2025/paper5.pdf";
 import Paper6 from "@assets/2025/paper6.pdf";
 import Socials from "@components/socials.astro";
 
+// Import paper PDFs for 2026
+import Paper2026_1000 from "@assets/2026/visgames.20261000.pdf";
+import Paper2026_1001 from "@assets/2026/visgames.20261001.pdf";
+import Paper2026_1002 from "@assets/2026/visgames.20261002.pdf";
+import Paper2026_1003 from "@assets/2026/visgames.20261003.pdf";
+import Paper2026_1004 from "@assets/2026/visgames.20261004.pdf";
+
+const papers2026 = [
+  {
+    title: "Data-Cards Drawagram: A Design Research Approach to Visualization Literacy",
+    authors: "Constanze Bachg, Yalin Ding, David Frenkel, Dion van Litsenburg, Tom Uijlenhoet, Davide Ceneda",
+    pdfUrl: Paper2026_1000,
+  },
+  {
+    title: "Data-Driven Narratives Cards: A Card-Based Design Activity for Participatory Data Storytelling",
+    authors: "Damla Çay",
+    pdfUrl: Paper2026_1001,
+  },
+  {
+    title: "Fishing for Papers: A Serendipitous Knowledge Discovery Game",
+    authors: "Johannes Eschner, Yuhan Guo",
+    pdfUrl: Paper2026_1002,
+  },
+  {
+    title: "Can You Trust This Chart? A Visualization Game Exploring Deception in Human- and AI-Created Charts",
+    authors: "Mandy Keck",
+    pdfUrl: Paper2026_1003,
+  },
+  {
+    title: "Happy Puzzles: Puzzle Games for Visualization Task Abstractions",
+    authors: "Sandhya Rajendran, Michaela Tuscher, Alessio Arleo, Daniel Archambault, Silvia Miksch, Tatiana von Landesberger, Velitchko Filipov",
+    pdfUrl: Paper2026_1004,
+  },
+];
+
 const papers2025 = [
   {
     title: "BattleGraphs: Forge, Fortify, and Fight in the Network Arena",
@@ -65,6 +100,7 @@ const papers2025 = [
     <Hero />
     <Pricing />
     <Program />
+    <Archive year={"2026"} title={"Accepted VisGames"} hideSubheading={true} description={"The wait is over — here are the five accepted papers coming to VisGames 2026! 🎮 We can't wait to see you in Nottingham on June 8th."} papers={papers2026} />
     <Features />
     <Topics />
     <Socials />

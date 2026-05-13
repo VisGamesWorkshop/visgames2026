@@ -3,6 +3,7 @@ export interface Props {
   year: string;
   title?: string;
   description?: string;
+  hideSubheading?: boolean;
   papers: Array<{
     title: string;
     authors: string;
@@ -11,21 +12,35 @@ export interface Props {
   }>;
 }
 
-const { year, title, description, papers } = Astro.props;
+const { year, title, description, hideSubheading, papers } = Astro.props;
 
 const defaultTitle = `Archive`;
-const defaultDescription = `Explore the evolution of visualization and games through our collection of accepted papers and research contributions from past workshop iterations.`;
+const defaultDescription = `From card games to digital puzzles — take a look at the research that kicked things off. These are the papers that made our first workshop a blast! 🎉`;
 ---
 
 <div class="archive-section relative">
   <div class="p-8">
-    <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight text-[#FF69B4] mb-4">
-      {title || defaultTitle}
-    </h2>
-    
-    <h3 class="text-2xl lg:text-3xl font-semibold text-[#FF69B4] mb-6">
-      {year} - Accepted VisGames
-    </h3>
+    {hideSubheading ? (
+      <div class="accepted-heading-wrapper mb-8">
+        <div class="accepted-badge">
+          <span class="badge-label">✦ {year} ✦</span>
+        </div>
+        <h2 class="accepted-title">
+          {title || defaultTitle}
+        </h2>
+        <div class="accepted-underline"></div>
+      </div>
+    ) : (
+      <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight text-[#FF69B4] mb-4">
+        {title || defaultTitle}
+      </h2>
+    )}
+
+    {!hideSubheading && (
+      <h3 class="text-2xl lg:text-3xl font-semibold text-[#FF69B4] mb-6">
+        {year} - Accepted VisGames
+      </h3>
+    )}
     
     <p class="text-lg mt-4 text-slate-600">
       {description || defaultDescription}
@@ -37,13 +52,12 @@ const defaultDescription = `Explore the evolution of visualization and games thr
     <ul class="mt-8 list-disc list-inside text-slate-600 text-lg space-y-4">
       {papers.map((paper) => (
         <li class="border-l-4 border-[#FF69B4] pl-4 py-2 bg-white/50 rounded-r-lg">
-          {paper.pdfUrl && (
+          {paper.pdfUrl ? (
             <a href={paper.pdfUrl} target="_blank" class="text-[#FF69B4] hover:text-[#E055A1]">
               <span>🔗</span> <strong><em>{paper.title}</em></strong>
             </a>
-          )}
-          {!paper.pdfUrl && (
-            <span class="text-[#FF69B4]"><strong><em>{paper.title}</em></strong></span>
+          ) : (
+            <span class="text-[#FF69B4]"><span>🔗</span> <strong><em>{paper.title}</em></strong></span>
           )}
           <br />
           <span class="text-slate-500">- {paper.authors}</span>
@@ -76,5 +90,51 @@ const defaultDescription = `Explore the evolution of visualization and games thr
   
   .archive-section a:hover {
     text-decoration: underline;
+  }
+
+  .accepted-heading-wrapper {
+    position: relative;
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+  }
+
+  .accepted-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #FF69B4, #E055A1);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.35rem 1.2rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(255, 105, 180, 0.4);
+  }
+
+  .accepted-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #FF69B4 0%, #c026a0 50%, #FF69B4 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+    letter-spacing: -0.02em;
+  }
+
+  .accepted-underline {
+    margin: 0.75rem auto 0;
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, #FF69B4, transparent);
+    border-radius: 2px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
   }
 </style>
