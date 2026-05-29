@@ -1,7 +1,7 @@
 ---
 draft: false
 name: "Lorenzo Amabili"
-affiliation: "Buzzi's RTD"
+affiliation: "Buzzi's RTD & TU Wien"
 role: "Workshop Chair"
 avatar: {
     src: "./../../assets/pictures/lorenzo.jpeg",
