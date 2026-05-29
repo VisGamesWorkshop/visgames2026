@@ -1,7 +1,7 @@
 ---
 draft: false
 name: "Julia Böck "
-affiliation: "St. Pölten University of Applied Sciences"
+affiliation: "University of Applied Science St. Pölten"
 role: "Program Committee"
 avatar: {
     src: "https://img.etimg.com/thumb/msid-113060171,width-650,height-488,imgsize-712173,resizemode-75/keanu-reeves.jpg",
