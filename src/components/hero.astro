@@ -5,8 +5,7 @@ import Link from "@components/ui/link.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<main
-  class="grid lg:grid-cols-2 place-items-center pb-8 md:pt-12 md:pb-12">
+<main class="grid lg:grid-cols-2 place-items-center pb-8 md:pt-12 md:pb-12">
   <div class="py-6 md:order-1 md:block">
     <Picture
       src={heroImage}
@@ -23,13 +22,14 @@ import { Icon } from "astro-icon/components";
       Workshop on Visualization Play, Games, and Activities
     </h1>
     <p class="text-lg mt-4 text-slate-600 max-w-xl">
-      This is the <strong>second</strong> EuroVis Workshop on Visualization Play, Games, and Activities that
-      is collocated with the <a
-      href="https://www.eurovis.org.uk/"
-      target="_blank"
-      class="underline"
-      rel="noopener">
-      EuroVis conference</a> taking place from June 8-12, 2026 in Nottingham, UK.
+      This is the <strong>second</strong> EuroVis Workshop on Visualization Play,
+      Games, and Activities that is collocated with the <a
+        href="https://www.eurovis.org.uk/"
+        target="_blank"
+        class="underline"
+        rel="noopener">
+        EuroVis conference</a
+      > taking place from June 8-12, 2026 in Nottingham, UK.
     </p>
 
     <p class="text-lg mt-4 text-slate-600 max-w-xl">
@@ -41,11 +41,14 @@ import { Icon } from "astro-icon/components";
         <Icon class="text-gray-400 w-5 h-5" name="bx:bxl-github" />
         Submissions & Materials
       </div>
-      <div
-        class="flex gap-2 items-center justify-center px-2 py-1 text-gray-400 border border-gray-300 rounded-sm cursor-not-allowed opacity-50 text-base font-medium">
-        <Icon class="text-gray-400 w-5 h-5" name="mdi:file-document-outline" />
-          Papers & Proceedings
-      </div>
+      <a
+        href="https://diglib.eg.org/handle/10.2312/3607327"
+        target="_blank"
+        rel="noopener"
+        class="flex gap-2 items-center justify-center px-2 py-1 border border-gray-300 rounded-sm text-base font-medium hover:border-gray-500 transition">
+        <Icon class="w-5 h-5" name="mdi:file-document-outline" />
+        Papers & Proceedings
+      </a>
     </div>
   </div>
 </main>
@@ -53,9 +56,10 @@ import { Icon } from "astro-icon/components";
 <section class="w-full bg-[#FF69B4]/10 py-6 mb-16">
   <div class="max-w-4xl mx-auto px-4">
     <p class="text-2xl text-slate-600 max-w-3xl mx-auto text-center">
-      🎉 We are excited to be part of <strong>EuroVis 2026</strong>! 
+      🎉 We are excited to be part of <strong>EuroVis 2026</strong>!
       <br />
-      Join us on <strong class="text-[#FF69B4]">June 8th, 2026</strong> in Nottingham, UK. 🥳✨
+      Join us on <strong class="text-[#FF69B4]">June 8th, 2026</strong> in Nottingham,
+      UK. 🥳✨
     </p>
   </div>
 </section>
